@@ -1,0 +1,47 @@
+{
+  "type" : "search",
+  "results" : [ {
+    "criteria" : {
+      "lastName" : "Guzanov"
+    },
+    "results" : [ {
+      "firstName" : "Andrey",
+      "lastName" : "Guzanov"
+    } ]
+  }, {
+    "criteria" : {
+      "productName" : "Tomatos",
+      "minTimes" : 2
+    },
+    "results" : [ {
+      "firstName" : "Dmitriy",
+      "lastName" : "Lebedev"
+    } ]
+  }, {
+    "criteria" : {
+      "minExpenses" : 112,
+      "maxExpenses" : 300
+    },
+    "results" : [ {
+      "firstName" : "Natalya",
+      "lastName" : "Moiseenkova"
+    }, {
+      "firstName" : "Andrey",
+      "lastName" : "Guzanov"
+    } ]
+  }, {
+    "criteria" : {
+      "badCustomers" : 3
+    },
+    "results" : [ {
+      "firstName" : "Natalya",
+      "lastName" : "Moiseenkova"
+    }, {
+      "firstName" : "Andrey",
+      "lastName" : "Guzanov"
+    }, {
+      "firstName" : "Dmitriy",
+      "lastName" : "Lebedev"
+    } ]
+  } ]
+}

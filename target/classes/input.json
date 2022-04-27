@@ -1,0 +1,8 @@
+{
+  "criterias": [
+    {"lastName": "Guzanov"},
+    {"productName": "Tomatos", "minTimes": 2},
+    {"minExpenses": 112, "maxExpenses": 300},
+    {"badCustomers": 3}
+  ]
+}
