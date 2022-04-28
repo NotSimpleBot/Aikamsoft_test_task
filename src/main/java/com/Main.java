@@ -25,7 +25,7 @@ public class Main {
         File pathToInputJsonFile = new File(args[1]);
         File pathToOutputJsonFile = new File(args[2]);
 
-        Criterias[] criteriasFromInputJsonFile = JsonHelper.getAllCriteriasFromJsonFile(pathToInputJsonFile);
+        Criterias[] criteriasFromInputJsonFile = JsonHelper.getAllCriteriasFromJsonFile(pathToInputJsonFile, operation);
         ResultJsonObject<Customer> theResultOfTheSearchForBuyersByCriteria =
                 CUSTOMERS_SERVICE.getAllCustomersListsByCriterias(operation, criteriasFromInputJsonFile);
         JsonHelper.saveAllCustomersToJsonOutputFile(pathToOutputJsonFile, theResultOfTheSearchForBuyersByCriteria);

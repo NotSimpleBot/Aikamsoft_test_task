@@ -6,14 +6,18 @@ import java.util.Date;
 
 public class CustomersBetweenTwoDatesCriteria implements Criterias {
     private Date startDate;
-    private Date enfDate;
+    private Date endDate;
 
     public CustomersBetweenTwoDatesCriteria() {
     }
 
     public CustomersBetweenTwoDatesCriteria(Date startDate, Date enfDate) {
         this.startDate = startDate;
-        this.enfDate = enfDate;
+        this.endDate = enfDate;
+    }
+
+    public long daysBetween(){
+        return  (endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000);
     }
 
     public Date getStartDate() {
@@ -24,11 +28,19 @@ public class CustomersBetweenTwoDatesCriteria implements Criterias {
         this.startDate = startDate;
     }
 
-    public Date getEnfDate() {
-        return enfDate;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnfDate(Date enfDate) {
-        this.enfDate = enfDate;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomersBetweenTwoDatesCriteria{" +
+                "startDate=" + startDate +
+                ", enfDate=" + endDate +
+                '}';
     }
 }
