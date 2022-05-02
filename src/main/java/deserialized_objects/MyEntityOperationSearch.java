@@ -1,19 +1,19 @@
-package com.guzanov;
+package deserialized_objects;
 
 import com.guzanov.criterias.Criterias;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyEntity<T> {
+public class MyEntityOperationSearch<T> {
     private Criterias criteria;
     private List<T> results;
 
-    public MyEntity() {
+    public MyEntityOperationSearch() {
         results = new ArrayList<>();
     }
 
-    public MyEntity(Criterias criteria) {
+    public MyEntityOperationSearch(Criterias criteria) {
         this.criteria = criteria;
         results = new ArrayList<>();
     }

@@ -1,6 +1,7 @@
 package com.guzanov.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Purchase {
     private Customer customer;
@@ -39,6 +40,19 @@ public class Purchase {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Purchase purchase = (Purchase) o;
+        return Objects.equals(customer, purchase.customer) && Objects.equals(product, purchase.product) && Objects.equals(date, purchase.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customer, product, date);
     }
 
     @Override

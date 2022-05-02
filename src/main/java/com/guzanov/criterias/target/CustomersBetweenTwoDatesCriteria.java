@@ -16,9 +16,9 @@ public class CustomersBetweenTwoDatesCriteria implements Criterias {
         this.endDate = enfDate;
     }
 
-    public long daysBetween(){
-        return  (endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000);
-    }
+//    public long daysBetween(){
+//        return  (endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000);
+//    }
 
     public Date getStartDate() {
         return startDate;

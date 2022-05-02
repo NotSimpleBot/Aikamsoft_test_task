@@ -3,12 +3,17 @@ package com.guzanov.dao.impl;
 import com.guzanov.connection.JdbcConnection;
 import com.guzanov.dao.CustomersDao;
 import com.guzanov.entity.Customer;
+import com.guzanov.entity.Product;
+import com.guzanov.entity.Purchase;
+import deserialized_objects.MyEntryOperationStat;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CustomersDaoImpl implements CustomersDao {
@@ -18,6 +23,29 @@ public class CustomersDaoImpl implements CustomersDao {
         this.connection = JdbcConnection.getConnection();
     }
 
+
+    @Override
+    public List<Purchase> getAllCustomersByDate(String date) {
+
+        List<Purchase> purchases = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * " +
+                    "FROM purchases " +
+                    "WHERE data = '" + date +"';");
+            while (resultSet.next()) {
+                Customer customer = getCustomerById(resultSet.getInt("customer_id"));
+                Product product = getProductById(resultSet.getInt("product_id"));
+                Purchase purchase =
+                        new Purchase(customer, product, resultSet.getDate("data"));
+                purchases.add(purchase);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return purchases;
+    }
 
     @Override
     public List<Customer> getAllCustomersByLastName(String lastName) {
@@ -115,5 +143,43 @@ public class CustomersDaoImpl implements CustomersDao {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public Customer getCustomerById(int customer_id) {
+        Customer customer = null;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * " +
+                    "FROM customers " +
+                    "WHERE id = " + customer_id);
+            while (resultSet.next()) {
+                customer =
+                        new Customer(resultSet.getString("first_name").trim(), resultSet.getString("last_name").trim());
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
+    @Override
+    public Product getProductById(int product_id) {
+        Product product = null;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * " +
+                    "FROM products " +
+                    "WHERE id = " + product_id);
+            while (resultSet.next()) {
+                product =
+                        new Product(resultSet.getString("product_name").trim(), resultSet.getInt("cost"));
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
     }
 }

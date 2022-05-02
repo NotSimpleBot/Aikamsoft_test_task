@@ -1,18 +1,19 @@
 package com.guzanov.service;
 
 import com.guzanov.Operation;
-import com.guzanov.MyEntity;
-import com.guzanov.ResultJsonObject;
 import com.guzanov.criterias.Criterias;
-import com.guzanov.criterias.target.BadCustomersLessCriteria;
-import com.guzanov.criterias.target.CustomersByLastNameCriteria;
-import com.guzanov.criterias.target.CustomersProductAmountBetweenCriteria;
-import com.guzanov.criterias.target.CustomersProductCountMoreCriteria;
+import com.guzanov.criterias.target.*;
 import com.guzanov.dao.CustomersDao;
 import com.guzanov.dao.impl.CustomersDaoImpl;
 import com.guzanov.entity.Customer;
+import com.guzanov.entity.Purchase;
+import deserialized_objects.MyEntityOperationSearch;
+import deserialized_objects.MyEntryOperationStat;
+import deserialized_objects.ResultJsonObjectOperationSearch;
+import deserialized_objects.ResultJsonObjectOperationStat;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class CustomersServiceImpl implements CustomersService {
     private final CustomersDao CUSTOMERS_DAO;
@@ -23,14 +24,14 @@ public class CustomersServiceImpl implements CustomersService {
 
 
     @Override
-    public ResultJsonObject<Customer> getAllCustomersListsByCriterias(Operation operation, Criterias[] criterias) {
-        ResultJsonObject<Customer> resultJsonObject =
-                new ResultJsonObject<>(operation, criterias.length);
-        MyEntity<Customer> entity;
+    public ResultJsonObjectOperationSearch<Customer> getAllCustomersListsByCriteriaOperationSearch(Criterias[] criterias) {
+        ResultJsonObjectOperationSearch<Customer> resultJsonObject =
+                new ResultJsonObjectOperationSearch<>(Operation.SEARCH, criterias.length);
+        MyEntityOperationSearch<Customer> entity;
 
         for (Criterias c : criterias) {
             Class<? extends Criterias> clazz = c.getClass();
-            entity = new MyEntity<>(c);
+            entity = new MyEntityOperationSearch<>(c);
             if (clazz == CustomersByLastNameCriteria.class) {
                 entity.addAll(CUSTOMERS_DAO.getAllCustomersByLastName(((CustomersByLastNameCriteria) c).getLastName()));
             } else {
@@ -49,6 +50,55 @@ public class CustomersServiceImpl implements CustomersService {
             resultJsonObject.addMyEntity(entity);
         }
         return resultJsonObject;
+    }
+
+    @Override
+    public ResultJsonObjectOperationStat<Customer> getAllCustomersListsByCriteriaOperationStat(Criterias[] criterias) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        int totalDays = 0;
+        Set<MyEntryOperationStat<Customer>> resultSet =
+                new LinkedHashSet<>();
+        for (Criterias c : criterias) {
+            if (c.getClass() == CustomersBetweenTwoDatesCriteria.class) {
+                Calendar start_date = Calendar.getInstance();
+                Calendar end_date = Calendar.getInstance();
+                start_date.setTime(((CustomersBetweenTwoDatesCriteria) c).getStartDate());
+                end_date.setTime(((CustomersBetweenTwoDatesCriteria) c).getEndDate());
+
+
+                List<Purchase> purchases;
+                List<MyEntryOperationStat<Customer>> interList;
+
+
+                while (!start_date.after(end_date)) {
+                    int day = start_date.get(Calendar.DAY_OF_WEEK);
+                    if ((day != Calendar.SATURDAY) && (day != Calendar.SUNDAY)) {
+                        purchases =
+                                CUSTOMERS_DAO.getAllCustomersByDate(dateFormat.format(start_date.getTime()));
+                        interList =
+                                new ArrayList<>();
+                        for (Purchase p : purchases) {
+                            Customer customer = p.getCustomer();
+                            String fullName = customer.getLastName() + " " + customer.getFirstName();
+                            List<MyEntryOperationStat.InnerEntryProductInfo> innerEntryProductInfo = new ArrayList<>();
+                            innerEntryProductInfo.add(new MyEntryOperationStat.InnerEntryProductInfo(p.getProduct().getProductName(), p.getProduct().getCost()));
+                            interList.add(new MyEntryOperationStat<>(fullName, innerEntryProductInfo, 0));
+                        }
+                        resultSet.addAll(interList);
+                        for (MyEntryOperationStat<Customer> out : resultSet) {
+                            for (MyEntryOperationStat<Customer> in : interList) {
+                                if (out.equals(in)) {
+                                    out.getPurchases().add(new MyEntryOperationStat.InnerEntryProductInfo(in.getPurchases().get(0).getName(), in.getPurchases().get(0).getExpenses()));
+                                }
+                            }
+                        }
+                        totalDays++;
+                    }
+                    start_date.add(Calendar.DATE, 1);
+                }
+            }
+        }
+        return new ResultJsonObjectOperationStat<>(Operation.STAT, totalDays, new ArrayList<>(resultSet));
     }
 
     @Override

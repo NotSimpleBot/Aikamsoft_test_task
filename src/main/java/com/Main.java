@@ -1,12 +1,12 @@
 package com;
 
 import com.guzanov.Operation;
-import com.guzanov.ResultJsonObject;
 import com.guzanov.criterias.Criterias;
 import com.guzanov.entity.Customer;
 import com.guzanov.helpers.JsonHelper;
 import com.guzanov.service.CustomersService;
 import com.guzanov.service.CustomersServiceImpl;
+import deserialized_objects.ResultJsonObjectMarker;
 
 import java.io.File;
 import java.util.Locale;
@@ -26,8 +26,15 @@ public class Main {
         File pathToOutputJsonFile = new File(args[2]);
 
         Criterias[] criteriasFromInputJsonFile = JsonHelper.getAllCriteriasFromJsonFile(pathToInputJsonFile, operation);
-        ResultJsonObject<Customer> theResultOfTheSearchForBuyersByCriteria =
-                CUSTOMERS_SERVICE.getAllCustomersListsByCriterias(operation, criteriasFromInputJsonFile);
+        ResultJsonObjectMarker<Customer> theResultOfTheSearchForBuyersByCriteria = null;
+        switch (operation) {
+            case SEARCH:
+                theResultOfTheSearchForBuyersByCriteria =
+                        CUSTOMERS_SERVICE.getAllCustomersListsByCriteriaOperationSearch(criteriasFromInputJsonFile);
+                break;
+            case STAT:
+                theResultOfTheSearchForBuyersByCriteria = CUSTOMERS_SERVICE.getAllCustomersListsByCriteriaOperationStat(criteriasFromInputJsonFile);
+        }
         JsonHelper.saveAllCustomersToJsonOutputFile(pathToOutputJsonFile, theResultOfTheSearchForBuyersByCriteria);
     }
 

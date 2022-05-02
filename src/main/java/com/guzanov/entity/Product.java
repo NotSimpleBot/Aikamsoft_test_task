@@ -1,5 +1,7 @@
 package com.guzanov.entity;
 
+import java.util.Objects;
+
 public class Product {
     private String productName;
     private int cost;
@@ -27,6 +29,19 @@ public class Product {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return cost == product.cost && Objects.equals(productName, product.productName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productName, cost);
     }
 
     @Override

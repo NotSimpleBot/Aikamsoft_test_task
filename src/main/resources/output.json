@@ -1,10 +1,33 @@
 {
   "type" : "stat",
-  "results" : [ {
-    "criteria" : {
-      "startDate" : 1578960000000,
-      "endDate" : 1579996800000
-    },
-    "results" : [ ]
-  } ]
+  "totalDays" : 2,
+  "customers" : [ {
+    "name" : "Guzanov Andrey",
+    "purchases" : [ {
+      "name" : "Apple",
+      "expenses" : 86
+    }, {
+      "name" : "Apple",
+      "expenses" : 86
+    }, {
+      "name" : "Potatos",
+      "expenses" : 32
+    }, {
+      "name" : "Apple",
+      "expenses" : 86
+    } ],
+    "totalExpenses" : 290
+  }, {
+    "name" : "Tihomirov Bogdan",
+    "purchases" : [ {
+      "name" : "Potatos",
+      "expenses" : 32
+    }, {
+      "name" : "Potatos",
+      "expenses" : 32
+    } ],
+    "totalExpenses" : 64
+  } ],
+  "totalExpenses" : 354,
+  "avgExpenses" : 177.0
 }
