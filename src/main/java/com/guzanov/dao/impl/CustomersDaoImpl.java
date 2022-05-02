@@ -5,15 +5,13 @@ import com.guzanov.dao.CustomersDao;
 import com.guzanov.entity.Customer;
 import com.guzanov.entity.Product;
 import com.guzanov.entity.Purchase;
-import deserialized_objects.MyEntryOperationStat;
+import com.guzanov.helpers.ErrorInJson;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CustomersDaoImpl implements CustomersDao {
@@ -42,7 +40,7 @@ public class CustomersDaoImpl implements CustomersDao {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
         return purchases;
     }
@@ -62,7 +60,7 @@ public class CustomersDaoImpl implements CustomersDao {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
         return result;
     }
@@ -88,7 +86,7 @@ public class CustomersDaoImpl implements CustomersDao {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
         return result;
     }
@@ -113,7 +111,7 @@ public class CustomersDaoImpl implements CustomersDao {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
 
         return result;
@@ -140,7 +138,7 @@ public class CustomersDaoImpl implements CustomersDao {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
         return result;
     }
@@ -159,7 +157,7 @@ public class CustomersDaoImpl implements CustomersDao {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
         return customer;
     }
@@ -178,7 +176,7 @@ public class CustomersDaoImpl implements CustomersDao {
             }
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
         return product;
     }

@@ -7,10 +7,10 @@ import com.guzanov.dao.CustomersDao;
 import com.guzanov.dao.impl.CustomersDaoImpl;
 import com.guzanov.entity.Customer;
 import com.guzanov.entity.Purchase;
-import deserialized_objects.MyEntityOperationSearch;
-import deserialized_objects.MyEntryOperationStat;
-import deserialized_objects.ResultJsonObjectOperationSearch;
-import deserialized_objects.ResultJsonObjectOperationStat;
+import com.guzanov.deserialized_objects.MyEntityOperationSearch;
+import com.guzanov.deserialized_objects.MyEntryOperationStat;
+import com.guzanov.deserialized_objects.ResultJsonObjectOperationSearch;
+import com.guzanov.deserialized_objects.ResultJsonObjectOperationStat;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

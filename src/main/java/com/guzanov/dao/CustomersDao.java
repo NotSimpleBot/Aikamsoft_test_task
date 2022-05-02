@@ -3,9 +3,7 @@ package com.guzanov.dao;
 import com.guzanov.entity.Customer;
 import com.guzanov.entity.Product;
 import com.guzanov.entity.Purchase;
-import deserialized_objects.MyEntryOperationStat;
 
-import java.util.Calendar;
 import java.util.List;
 
 public interface CustomersDao {

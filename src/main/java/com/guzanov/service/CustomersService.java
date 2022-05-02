@@ -6,8 +6,8 @@ import com.guzanov.criterias.target.CustomersByLastNameCriteria;
 import com.guzanov.criterias.target.CustomersProductAmountBetweenCriteria;
 import com.guzanov.criterias.target.CustomersProductCountMoreCriteria;
 import com.guzanov.entity.Customer;
-import deserialized_objects.ResultJsonObjectOperationSearch;
-import deserialized_objects.ResultJsonObjectOperationStat;
+import com.guzanov.deserialized_objects.ResultJsonObjectOperationSearch;
+import com.guzanov.deserialized_objects.ResultJsonObjectOperationStat;
 
 import java.util.List;
 

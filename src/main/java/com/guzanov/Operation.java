@@ -2,7 +2,8 @@ package com.guzanov;
 
 public enum Operation {
     SEARCH("search"),
-    STAT("stat");
+    STAT("stat"),
+    ERROR("error");
 
 
     private String stat;

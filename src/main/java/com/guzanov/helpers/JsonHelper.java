@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.guzanov.Operation;
-import deserialized_objects.ResultJsonObjectMarker;
+import com.guzanov.deserialized_objects.ResultJsonObjectMarker;
 import com.guzanov.criterias.Criterias;
 import com.guzanov.criterias.target.*;
 import com.guzanov.entity.Customer;
@@ -31,8 +31,7 @@ public class JsonHelper {
                     CustomersBetweenTwoDatesCriteria criteria = OBJECT_MAPPER.readValue(json, CustomersBetweenTwoDatesCriteria.class);
                     criteriasList.add(criteria);
                 } catch (JsonProcessingException e) {
-                    // TODO: 28.04.2022 LOG
-                    e.printStackTrace();
+                    ErrorInJson.writeError(e);
                 }
             }
         }
@@ -45,8 +44,7 @@ public class JsonHelper {
         try {
             OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(outputFile, resultJsonObject);
         } catch (IOException e) {
-            // TODO: 27.04.2022 LOG
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
 
     }
