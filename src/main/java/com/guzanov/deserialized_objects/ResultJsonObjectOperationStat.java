@@ -1,31 +1,21 @@
 package com.guzanov.deserialized_objects;
 
-import com.guzanov.Operation;
+import com.guzanov.helpers.Operation;
 
 import java.util.List;
 import java.util.Objects;
 
-public class ResultJsonObjectOperationStat<T> implements ResultJsonObjectMarker<T> {
+public class ResultJsonObjectOperationStat implements ResultJsonObjectMarker {
     private Operation type;
     private int totalDays;
-    private List<MyEntryOperationStat<T>> customers;
+    private List<MyEntryOperationStat> customers;
     private int totalExpenses = 0;
     private double avgExpenses = 0;
 
     public ResultJsonObjectOperationStat() {
     }
 
-    public ResultJsonObjectOperationStat(Operation type, List<MyEntryOperationStat<T>> customers) {
-        this.type = type;
-        this.customers = customers;
-    }
-
-    public ResultJsonObjectOperationStat(Operation type, int totalDays) {
-        this.type = type;
-        this.totalDays = totalDays;
-    }
-
-    public ResultJsonObjectOperationStat(Operation type, int totalDays, List<MyEntryOperationStat<T>> customers) {
+    public ResultJsonObjectOperationStat(Operation type, int totalDays, List<MyEntryOperationStat> customers) {
         this.type = type;
         this.totalDays = totalDays;
         this.customers = customers;
@@ -47,17 +37,17 @@ public class ResultJsonObjectOperationStat<T> implements ResultJsonObjectMarker<
         this.totalDays = totalDays;
     }
 
-    public List<MyEntryOperationStat<T>> getCustomers() {
+    public List<MyEntryOperationStat> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(List<MyEntryOperationStat<T>> customers) {
+    public void setCustomers(List<MyEntryOperationStat> customers) {
         this.customers = customers;
     }
 
     public int getTotalExpenses() {
         totalExpenses = 0;
-        for (MyEntryOperationStat<T> m : customers) {
+        for (MyEntryOperationStat m : customers) {
             totalExpenses += m.getTotalExpenses();
         }
         return totalExpenses;
@@ -68,7 +58,7 @@ public class ResultJsonObjectOperationStat<T> implements ResultJsonObjectMarker<
     }
 
     public double getAvgExpenses() {
-        avgExpenses = getTotalExpenses()/customers.size();
+        avgExpenses = getTotalExpenses() / customers.size();
         return avgExpenses;
     }
 
@@ -80,12 +70,130 @@ public class ResultJsonObjectOperationStat<T> implements ResultJsonObjectMarker<
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ResultJsonObjectOperationStat<?> that = (ResultJsonObjectOperationStat<?>) o;
+        ResultJsonObjectOperationStat that = (ResultJsonObjectOperationStat) o;
         return totalDays == that.totalDays && type == that.type && Objects.equals(customers, that.customers);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(type, totalDays, customers);
+    }
+
+
+    public static class MyEntryOperationStat implements Comparable<MyEntryOperationStat> {
+        private String name;
+        private List<InnerEntryProductInfo> purchases;
+        private int totalExpenses;
+
+        public MyEntryOperationStat() {
+        }
+
+
+        public MyEntryOperationStat(String name, List<InnerEntryProductInfo> purchases, int totalExpenses) {
+            this.name = name;
+            this.purchases = purchases;
+            this.totalExpenses = totalExpenses;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public List<InnerEntryProductInfo> getPurchases() {
+            return purchases;
+        }
+
+        public void setPurchases(List<InnerEntryProductInfo> purchases) {
+            this.purchases = purchases;
+        }
+
+
+        public int getTotalExpenses() {
+            totalExpenses = 0;
+            for (InnerEntryProductInfo i : purchases) {
+                totalExpenses += i.getExpenses();
+            }
+            return totalExpenses;
+        }
+
+        public void setTotalExpenses(int totalExpenses) {
+            this.totalExpenses = totalExpenses;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            MyEntryOperationStat that = (MyEntryOperationStat) o;
+            return Objects.equals(name, that.getName());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name);
+        }
+
+        @Override
+        public int compareTo(MyEntryOperationStat o) {
+            return this.getTotalExpenses() - o.getTotalExpenses();
+        }
+
+        @Override
+        public String toString() {
+            return "MyEntryOperationStat{" +
+                    "name='" + name + '\'' +
+                    ", totalExpenses=" + getTotalExpenses() +
+                    '}';
+        }
+
+
+        public static class InnerEntryProductInfo {
+            private String name;
+            private int expenses;
+
+            public InnerEntryProductInfo() {
+            }
+
+            public InnerEntryProductInfo(String name, int expenses) {
+                this.name = name;
+                this.expenses = expenses;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public int getExpenses() {
+                return expenses;
+            }
+
+            public void setExpenses(int expenses) {
+                this.expenses = expenses;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                InnerEntryProductInfo that = (InnerEntryProductInfo) o;
+                return expenses == that.getExpenses() && Objects.equals(name, that.getName());
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(name, expenses);
+            }
+
+        }
     }
 }

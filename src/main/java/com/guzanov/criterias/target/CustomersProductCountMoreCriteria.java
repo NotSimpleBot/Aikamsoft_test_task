@@ -1,7 +1,11 @@
 package com.guzanov.criterias.target;
 
 import com.guzanov.criterias.Criterias;
-
+/**
+ *Класс для критерия 2):
+ * <p>
+ *Название товара и число раз — поиск покупателей, купивших этот товар не менее, чем указанное число раз
+ */
 public class CustomersProductCountMoreCriteria implements Criterias {
     private String productName;
     private int minTimes;

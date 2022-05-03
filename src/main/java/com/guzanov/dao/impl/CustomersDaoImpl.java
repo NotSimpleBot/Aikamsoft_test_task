@@ -24,7 +24,7 @@ public class CustomersDaoImpl implements CustomersDao {
 
     @Override
     public List<Purchase> getAllCustomersByDate(String date) {
-
+        ProductDaoImpl productDao = new ProductDaoImpl();
         List<Purchase> purchases = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -33,7 +33,7 @@ public class CustomersDaoImpl implements CustomersDao {
                     "WHERE data = '" + date +"';");
             while (resultSet.next()) {
                 Customer customer = getCustomerById(resultSet.getInt("customer_id"));
-                Product product = getProductById(resultSet.getInt("product_id"));
+                Product product = productDao.getProductById(resultSet.getInt("product_id"));
                 Purchase purchase =
                         new Purchase(customer, product, resultSet.getDate("data"));
                 purchases.add(purchase);
@@ -162,22 +162,5 @@ public class CustomersDaoImpl implements CustomersDao {
         return customer;
     }
 
-    @Override
-    public Product getProductById(int product_id) {
-        Product product = null;
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * " +
-                    "FROM products " +
-                    "WHERE id = " + product_id);
-            while (resultSet.next()) {
-                product =
-                        new Product(resultSet.getString("product_name").trim(), resultSet.getInt("cost"));
-            }
-            statement.close();
-        } catch (SQLException e) {
-            ErrorInJson.writeError(e);
-        }
-        return product;
-    }
+
 }

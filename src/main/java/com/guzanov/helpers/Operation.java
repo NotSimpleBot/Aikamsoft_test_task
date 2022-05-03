@@ -1,4 +1,4 @@
-package com.guzanov;
+package com.guzanov.helpers;
 
 public enum Operation {
     SEARCH("search"),

@@ -10,7 +10,7 @@
     } ]
   }, {
     "criteria" : {
-      "productName" : "Tomatos",
+      "productName" : "Tomatoes",
       "minTimes" : 2
     },
     "results" : [ {
@@ -20,7 +20,7 @@
   }, {
     "criteria" : {
       "minExpenses" : 112,
-      "maxExpenses" : 300
+      "maxExpenses" : 4000
     },
     "results" : [ {
       "firstName" : "Natalya",
@@ -28,6 +28,21 @@
     }, {
       "firstName" : "Andrey",
       "lastName" : "Guzanov"
+    }, {
+      "firstName" : "Dmitriy",
+      "lastName" : "Lebedev"
+    }, {
+      "firstName" : "Bogdan",
+      "lastName" : "Tihomirov"
+    }, {
+      "firstName" : "Bill",
+      "lastName" : "Black"
+    }, {
+      "firstName" : "Anna",
+      "lastName" : "Yellow"
+    }, {
+      "firstName" : "Andy",
+      "lastName" : "Mour"
     } ]
   }, {
     "criteria" : {

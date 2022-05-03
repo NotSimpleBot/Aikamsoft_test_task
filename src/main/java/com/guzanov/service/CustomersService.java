@@ -14,7 +14,7 @@ import java.util.List;
 public interface CustomersService {
     ResultJsonObjectOperationSearch<Customer> getAllCustomersListsByCriteriaOperationSearch(Criterias[] criterias);
 
-    ResultJsonObjectOperationStat<Customer> getAllCustomersListsByCriteriaOperationStat(Criterias[] criterias);
+    ResultJsonObjectOperationStat getAllCustomersListsByCriteriaOperationStat(Criterias[] criterias);
 
     List<Customer> getAllCustomersByLastName(CustomersByLastNameCriteria criteria);
 

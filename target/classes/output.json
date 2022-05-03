@@ -1,4 +1,78 @@
 {
-  "type" : "error",
-  "message" : "321"
+  "type" : "stat",
+  "totalDays" : 2,
+  "customers" : [ {
+    "name" : "Tihomirov Bogdan",
+    "purchases" : [ {
+      "name" : "Potatos",
+      "expenses" : 32
+    }, {
+      "name" : "Potatos",
+      "expenses" : 32
+    } ],
+    "totalExpenses" : 64
+  }, {
+    "name" : "Yellow Anna",
+    "purchases" : [ {
+      "name" : "Potatos",
+      "expenses" : 32
+    }, {
+      "name" : "Potatos",
+      "expenses" : 32
+    } ],
+    "totalExpenses" : 64
+  }, {
+    "name" : "Mour Andy",
+    "purchases" : [ {
+      "name" : "Potatos",
+      "expenses" : 32
+    }, {
+      "name" : "Potatos",
+      "expenses" : 32
+    }, {
+      "name" : "Water",
+      "expenses" : 25
+    }, {
+      "name" : "Carrot",
+      "expenses" : 42
+    }, {
+      "name" : "Bananas",
+      "expenses" : 110
+    } ],
+    "totalExpenses" : 241
+  }, {
+    "name" : "Guzanov Andrey",
+    "purchases" : [ {
+      "name" : "Apple",
+      "expenses" : 86
+    }, {
+      "name" : "Apple",
+      "expenses" : 86
+    }, {
+      "name" : "Potatos",
+      "expenses" : 32
+    }, {
+      "name" : "Apple",
+      "expenses" : 86
+    } ],
+    "totalExpenses" : 290
+  }, {
+    "name" : "Black Bill",
+    "purchases" : [ {
+      "name" : "Chips",
+      "expenses" : 95
+    }, {
+      "name" : "Chips",
+      "expenses" : 95
+    }, {
+      "name" : "Bananas",
+      "expenses" : 110
+    }, {
+      "name" : "Tomatoes",
+      "expenses" : 80
+    } ],
+    "totalExpenses" : 380
+  } ],
+  "totalExpenses" : 1039,
+  "avgExpenses" : 207.0
 }

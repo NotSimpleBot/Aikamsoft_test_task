@@ -20,13 +20,8 @@ public class MainServiceImplTest {
     @Test
     public void getAllCustomersByLastName() {
         List<String> expected = new ArrayList<>(Arrays.asList("Dmitriy", "Natalya"));
-//        List<Customer> tmp = service.getAllCustomersByProductMinTimes("Tomatos",1);
         List<String> result = new ArrayList<>();
-//        for (Customer t : tmp){
-//            result.add(t.getFirstName());
-//        }
-        System.out.println(expected);
-        System.out.println(result);
+
         Assert.assertArrayEquals(expected.toArray(), result.toArray());
     }
 

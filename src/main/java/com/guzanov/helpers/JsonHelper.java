@@ -3,17 +3,17 @@ package com.guzanov.helpers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.guzanov.Operation;
-import com.guzanov.deserialized_objects.ResultJsonObjectMarker;
 import com.guzanov.criterias.Criterias;
 import com.guzanov.criterias.target.*;
-import com.guzanov.entity.Customer;
+import com.guzanov.deserialized_objects.ResultJsonObjectMarker;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class JsonHelper {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -40,7 +40,7 @@ public class JsonHelper {
         return criterias;
     }
 
-    public static void saveAllCustomersToJsonOutputFile(File outputFile, ResultJsonObjectMarker<Customer> resultJsonObject) {
+    public static void saveAllCustomersToJsonOutputFile(File outputFile, ResultJsonObjectMarker resultJsonObject) {
         try {
             OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(outputFile, resultJsonObject);
         } catch (IOException e) {
@@ -56,8 +56,7 @@ public class JsonHelper {
                 sb.append(reader.readLine());
             }
         } catch (IOException ioException) {
-            // TODO: 27.04.2022 LOG
-            ioException.printStackTrace();
+            ErrorInJson.writeError(ioException);
         }
         return sb.toString();
     }
@@ -103,8 +102,7 @@ public class JsonHelper {
                 }
             }
         } catch (JsonProcessingException e) {
-            // TODO: 27.04.2022 LOG
-            e.printStackTrace();
+            ErrorInJson.writeError(e);
         }
         return result;
     }

@@ -2,10 +2,12 @@ package com.guzanov.helpers;
 
 import com.Main;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.guzanov.Operation;
 
 import java.io.IOException;
 
+/**
+ * Класс для логгирования ошибок в исходящий .json файл
+ */
 public class ErrorInJson {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private final Operation type = Operation.ERROR;

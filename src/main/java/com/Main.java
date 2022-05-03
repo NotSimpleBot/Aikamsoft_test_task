@@ -1,9 +1,7 @@
 package com;
 
-import com.guzanov.Operation;
+import com.guzanov.helpers.Operation;
 import com.guzanov.criterias.Criterias;
-import com.guzanov.entity.Customer;
-import com.guzanov.helpers.ErrorInJson;
 import com.guzanov.helpers.JsonHelper;
 import com.guzanov.service.CustomersService;
 import com.guzanov.service.CustomersServiceImpl;
@@ -16,12 +14,11 @@ public class Main {
     public static Operation operation;
     public static File pathToInputJsonFile;
     public static File pathToOutputJsonFile;
-
     private static final CustomersService CUSTOMERS_SERVICE =
             new CustomersServiceImpl();
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         startProgram(args);
     }
 
@@ -31,9 +28,8 @@ public class Main {
         pathToInputJsonFile = new File(args[1]);
         pathToOutputJsonFile = new File(args[2]);
 
-
         Criterias[] criteriasFromInputJsonFile = JsonHelper.getAllCriteriasFromJsonFile(pathToInputJsonFile, operation);
-        ResultJsonObjectMarker<Customer> theResultOfTheSearchForBuyersByCriteria = null;
+        ResultJsonObjectMarker theResultOfTheSearchForBuyersByCriteria = null;
         switch (operation) {
             case SEARCH:
                 theResultOfTheSearchForBuyersByCriteria =

@@ -2,6 +2,11 @@ package com.guzanov.criterias.target;
 
 import com.guzanov.criterias.Criterias;
 
+/**
+ * Класс для критерия 1):
+ * <p>
+ * Фамилия — поиск покупателей с этой фамилией
+ */
 public class CustomersByLastNameCriteria implements Criterias {
     private String lastName;
 
