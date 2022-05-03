@@ -15,6 +15,7 @@
 >>**PASSWORD** = "root"
 >
 > Имя jar файла **Aikamsoft.jar**, запуск требуется производить следующей коммандой:
+> 
 > **java -jar Aikamsoft.jar search input.json output.json**
 
 ## Общее описание проекта:
