@@ -5,6 +5,12 @@ import com.guzanov.helpers.Operation;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Экземпляр данного класса записывается в output json файл,
+ * содержит вложенный статический класс с набором данных, актуальным для определенного промежутка времени.
+ * <p>
+ * Класс актуален для операции поиска - Operation.STAT.
+ */
 public class ResultJsonObjectOperationStat implements ResultJsonObjectMarker {
     private Operation type;
     private int totalDays;
@@ -80,6 +86,13 @@ public class ResultJsonObjectOperationStat implements ResultJsonObjectMarker {
     }
 
 
+    /**
+     * Вложенный статический класс, содержит еще 1 вложенный статический класс.
+     * <p>
+     * Данный класс содержит полное имя покупателя,
+     * список покупок и суммарную стоимость покупок,
+     * все данные актуальны для определенного промежутка времени для одного покупателя.
+     */
     public static class MyEntryOperationStat implements Comparable<MyEntryOperationStat> {
         private String name;
         private List<InnerEntryProductInfo> purchases;
@@ -153,6 +166,12 @@ public class ResultJsonObjectOperationStat implements ResultJsonObjectMarker {
         }
 
 
+        /**
+         * Вложенный статический класс.
+         * <p>
+         * Содержит данные о названии продукта и его стоимости,
+         * экземпляры данного класса хранятся в списке внешнего класса.
+         */
         public static class InnerEntryProductInfo {
             private String name;
             private int expenses;

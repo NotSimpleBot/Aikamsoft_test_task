@@ -2,7 +2,11 @@ package com.guzanov.entity;
 
 import java.util.Date;
 import java.util.Objects;
-
+/**
+ * Класс-сущность (Entity), для получения/изменения данных в таблице базы данных.
+ * <p>
+ * Данная модель содержит поля идентичные столбцам таблицы 'purchases'.
+ */
 public class Purchase {
     private Customer customer;
     private Product product;

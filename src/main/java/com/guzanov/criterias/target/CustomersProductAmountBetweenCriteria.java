@@ -2,11 +2,10 @@ package com.guzanov.criterias.target;
 
 import com.guzanov.criterias.Criterias;
 /**
- * Класс для критерия 3):
+ * Класс для критерия 3) из ТЗ.
  * <p>
  * Минимальная и максимальная стоимость всех покупок — поиск покупателей,
- * <p>
- * у которых общая стоимость всех покупок за всё время попадает в интервал
+ * у которых общая стоимость всех покупок за всё время попадает в интервал.
  */
 public class CustomersProductAmountBetweenCriteria implements Criterias {
     private int minExpenses, maxExpenses;

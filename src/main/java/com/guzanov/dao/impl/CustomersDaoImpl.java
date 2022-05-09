@@ -14,6 +14,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс-реализация интерфейса CustomersDao.
+ * <p>
+ * Содержит бизнес-логику процесса взаимодействия с БД (с таблицей 'customers').
+ */
 public class CustomersDaoImpl implements CustomersDao {
     private final Connection connection;
 
@@ -30,7 +35,7 @@ public class CustomersDaoImpl implements CustomersDao {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * " +
                     "FROM purchases " +
-                    "WHERE data = '" + date +"';");
+                    "WHERE data = '" + date + "';");
             while (resultSet.next()) {
                 Customer customer = getCustomerById(resultSet.getInt("customer_id"));
                 Product product = productDao.getProductById(resultSet.getInt("product_id"));

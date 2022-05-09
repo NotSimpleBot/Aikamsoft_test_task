@@ -10,6 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Класс-реализация интерфейса ProductDao.
+ * <p>
+ * Содержит бизнес-логику процесса взаимодействия с БД (с таблицей 'products').
+ */
 public class ProductDaoImpl implements ProductDao {
     private final Connection connection;
 

@@ -5,7 +5,7 @@ import com.guzanov.criterias.Criterias;
 import java.util.Date;
 
 /**
- * Класс для сбора статистики (Операция STAT) за указанный период
+ * Класс для сбора статистики (Operation.STAT) за указанный период времени.
  */
 public class CustomersBetweenTwoDatesCriteria implements Criterias {
     private Date startDate;
