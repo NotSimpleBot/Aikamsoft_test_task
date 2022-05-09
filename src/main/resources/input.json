@@ -1,4 +1,9 @@
 {
-  "startDate": "2022-04-27",
-  "endDate": "2022-04-28"
+  "criterias": [
+    {"lastName": "Guzanov"},
+    {"productName": "Bananas", "minTimes": 1},
+    {"minExpenses": 112, "maxExpenses": 4000},
+    {"badCustomers": 3}
+  ]
 }
+

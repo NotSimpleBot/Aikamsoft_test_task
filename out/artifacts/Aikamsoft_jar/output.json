@@ -46,7 +46,7 @@
     } ]
   }, {
     "criteria" : {
-      "badCustomers" : 3
+      "badCustomers" : 5
     },
     "results" : [ {
       "firstName" : "Natalya",
@@ -57,6 +57,12 @@
     }, {
       "firstName" : "Dmitriy",
       "lastName" : "Lebedev"
+    }, {
+      "firstName" : "Bogdan",
+      "lastName" : "Tihomirov"
+    }, {
+      "firstName" : "Bill",
+      "lastName" : "Black"
     } ]
   } ]
 }

@@ -15,16 +15,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Содержит методы для работы с Json файлами и критериями.
+ */
 public class JsonHelper {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER =
+            new ObjectMapper();
 
+    /**
+     * Преобразует Json файл в строку и парсит критерии.
+     *
+     * @param file      Путь до input файла с типом операции
+     * @param operation Тип операции (search, stat)
+     * @return Массив критериев
+     */
     public static Criterias[] getAllCriteriasFromJsonFile(File file, Operation operation) {
-        Criterias[] criterias;
         String json = getJsonInString(file);
+        return parsingTheCriteria(json, operation);
+    }
+
+    /**
+     * Разбирвет Json представленный в виде строки и в зависимости от типа переданной операции десериализует критерии.
+     *
+     * @param json      Json представленный в виде строки
+     * @param operation Тип операции (search, stat)
+     * @return Массив критериев
+     */
+    public static Criterias[] parsingTheCriteria(String json, Operation operation) {
         List<Criterias> criteriasList = new ArrayList<>();
 
         if (operation == Operation.SEARCH) {
-            criteriasList = iterateForAllTreeNode(json);
+            criteriasList = iterateForAllJsonNode(json);
         } else {
             if (operation == Operation.STAT) {
                 try {
@@ -35,11 +56,16 @@ public class JsonHelper {
                 }
             }
         }
-        criterias = new Criterias[criteriasList.size()];
-        criteriasList.toArray(criterias);
-        return criterias;
+        return criteriasList.toArray(new Criterias[0]);
     }
 
+    /**
+     * Сериализует результирующий объект в json файл.
+     *
+     * @param outputFile       Файл, в который происходит запись объекта
+     * @param resultJsonObject Объект для сериализации - совокупность покупателей
+     *                         с дополнительными статистическими данными
+     */
     public static void saveAllCustomersToJsonOutputFile(File outputFile, ResultJsonObjectMarker resultJsonObject) {
         try {
             OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(outputFile, resultJsonObject);
@@ -49,6 +75,12 @@ public class JsonHelper {
 
     }
 
+    /**
+     * Преобразует Json в строку.
+     *
+     * @param file Файл, который будет преобразован в строку
+     * @return Строку - преобразованный файл
+     */
     private static String getJsonInString(File file) {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -61,23 +93,30 @@ public class JsonHelper {
         return sb.toString();
     }
 
-    private static void checkCriteriasInJson(List<Criterias> result, JsonNode node, ObjectMapper mapper) throws JsonProcessingException {
+    /**
+     * Обеспечивает представление критериев в виде Java объекта (десериализация).
+     *
+     * @param result В этот список будет происходить запись каждой десериализованной критерии
+     * @param node   1 элементы из общего набора критериев, представленных в json файле
+     * @throws JsonProcessingException если не удается десериализовать 'node'
+     */
+    private static void checkCriteriasInJson(List<Criterias> result, JsonNode node) throws JsonProcessingException {
         Criterias c;
 
         if (node.toString().contains("lastName")) {
-            c = mapper.readValue(node.toString(), CustomersByLastNameCriteria.class);
+            c = OBJECT_MAPPER.readValue(node.toString(), CustomersByLastNameCriteria.class);
             result.add(c);
         } else {
             if (node.toString().contains("productName")) {
-                c = mapper.readValue(node.toString(), CustomersProductCountMoreCriteria.class);
+                c = OBJECT_MAPPER.readValue(node.toString(), CustomersProductCountMoreCriteria.class);
                 result.add(c);
             } else {
                 if (node.toString().contains("minExpenses")) {
-                    c = mapper.readValue(node.toString(), CustomersProductAmountBetweenCriteria.class);
+                    c = OBJECT_MAPPER.readValue(node.toString(), CustomersProductAmountBetweenCriteria.class);
                     result.add(c);
                 } else {
                     if (node.toString().contains("badCustomers")) {
-                        c = mapper.readValue(node.toString(), BadCustomersLessCriteria.class);
+                        c = OBJECT_MAPPER.readValue(node.toString(), BadCustomersLessCriteria.class);
                         result.add(c);
                     }
                 }
@@ -85,20 +124,27 @@ public class JsonHelper {
         }
     }
 
-    private static List<Criterias> iterateForAllTreeNode(String json) {
+    /**
+     * Возвращает список критериев из строкового представления json.
+     * <p>
+     * Преобраезует строковое представление json в набор 'node', каждая отдельная нода - самодостаточный критерий.
+     *
+     * @param json Строковое представление json
+     * @return Список критериев
+     */
+    private static List<Criterias> iterateForAllJsonNode(String json) {
         List<Criterias> result = new ArrayList<>();
         JsonNode nodeOut;
         Iterator<JsonNode> iteratorOut;
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            nodeOut = mapper.readTree(json);
+            nodeOut = OBJECT_MAPPER.readTree(json);
             iteratorOut = nodeOut.elements();
             while (iteratorOut.hasNext()) {
                 JsonNode nodeIn = iteratorOut.next();
                 Iterator<JsonNode> iteratorIn = nodeIn.elements();
                 while (iteratorIn.hasNext()) {
                     JsonNode node = iteratorIn.next();
-                    checkCriteriasInJson(result, node, mapper);
+                    checkCriteriasInJson(result, node);
                 }
             }
         } catch (JsonProcessingException e) {

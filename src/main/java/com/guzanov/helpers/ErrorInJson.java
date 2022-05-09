@@ -20,6 +20,11 @@ public class ErrorInJson {
         this.message = message;
     }
 
+    /**
+     * Записывает сообщение переданного исключения в результирующий Json файл (сереализует) и завершает работу программу.
+     *
+     * @param exception Исключение, будет записано в файл
+     */
     public static void writeError(Exception exception) {
         try {
             ErrorInJson errorInJson = new ErrorInJson(exception.getMessage());

@@ -1,78 +1,59 @@
 {
-  "type" : "stat",
-  "totalDays" : 2,
-  "customers" : [ {
-    "name" : "Tihomirov Bogdan",
-    "purchases" : [ {
-      "name" : "Potatos",
-      "expenses" : 32
-    }, {
-      "name" : "Potatos",
-      "expenses" : 32
-    } ],
-    "totalExpenses" : 64
+  "type" : "search",
+  "results" : [ {
+    "criteria" : {
+      "lastName" : "Guzanov"
+    },
+    "results" : [ {
+      "firstName" : "Andrey",
+      "lastName" : "Guzanov"
+    } ]
   }, {
-    "name" : "Yellow Anna",
-    "purchases" : [ {
-      "name" : "Potatos",
-      "expenses" : 32
-    }, {
-      "name" : "Potatos",
-      "expenses" : 32
-    } ],
-    "totalExpenses" : 64
+    "criteria" : {
+      "productName" : "Bananas",
+      "minTimes" : 1
+    },
+    "results" : [ ]
   }, {
-    "name" : "Mour Andy",
-    "purchases" : [ {
-      "name" : "Potatos",
-      "expenses" : 32
+    "criteria" : {
+      "minExpenses" : 112,
+      "maxExpenses" : 4000
+    },
+    "results" : [ {
+      "firstName" : "Natalya",
+      "lastName" : "Moiseenkova"
     }, {
-      "name" : "Potatos",
-      "expenses" : 32
+      "firstName" : "Andrey",
+      "lastName" : "Guzanov"
     }, {
-      "name" : "Water",
-      "expenses" : 25
+      "firstName" : "Dmitriy",
+      "lastName" : "Lebedev"
     }, {
-      "name" : "Carrot",
-      "expenses" : 42
+      "firstName" : "Bogdan",
+      "lastName" : "Tihomirov"
     }, {
-      "name" : "Bananas",
-      "expenses" : 110
-    } ],
-    "totalExpenses" : 241
+      "firstName" : "Bill",
+      "lastName" : "Black"
+    }, {
+      "firstName" : "Anna",
+      "lastName" : "Yellow"
+    }, {
+      "firstName" : "Andy",
+      "lastName" : "Mour"
+    } ]
   }, {
-    "name" : "Guzanov Andrey",
-    "purchases" : [ {
-      "name" : "Apple",
-      "expenses" : 86
+    "criteria" : {
+      "badCustomers" : 3
+    },
+    "results" : [ {
+      "firstName" : "Natalya",
+      "lastName" : "Moiseenkova"
     }, {
-      "name" : "Apple",
-      "expenses" : 86
+      "firstName" : "Andrey",
+      "lastName" : "Guzanov"
     }, {
-      "name" : "Potatos",
-      "expenses" : 32
-    }, {
-      "name" : "Apple",
-      "expenses" : 86
-    } ],
-    "totalExpenses" : 290
-  }, {
-    "name" : "Black Bill",
-    "purchases" : [ {
-      "name" : "Chips",
-      "expenses" : 95
-    }, {
-      "name" : "Chips",
-      "expenses" : 95
-    }, {
-      "name" : "Bananas",
-      "expenses" : 110
-    }, {
-      "name" : "Tomatoes",
-      "expenses" : 80
-    } ],
-    "totalExpenses" : 380
-  } ],
-  "totalExpenses" : 1039,
-  "avgExpenses" : 207.0
+      "firstName" : "Dmitriy",
+      "lastName" : "Lebedev"
+    } ]
+  } ]
 }

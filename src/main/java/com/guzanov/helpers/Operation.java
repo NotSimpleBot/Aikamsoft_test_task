@@ -1,5 +1,8 @@
 package com.guzanov.helpers;
 
+/**
+ * Содержит основные типы возможных операций.
+ */
 public enum Operation {
     SEARCH("search"),
     STAT("stat"),
@@ -12,6 +15,11 @@ public enum Operation {
         this.stat = stat;
     }
 
+    /**
+     * Возвращает строковое представление операции.
+     *
+     * @return Операция в виде строки
+     */
     public String getStat() {
         return stat;
     }
